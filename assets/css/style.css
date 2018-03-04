@@ -6,10 +6,42 @@
     justify-content: center;
 }
 
-.theme {
+@keyframes flip {
+    from {
+      transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      animation-timing-function: ease-out;
+    }
+  
+    40% {
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+      animation-timing-function: ease-out;
+    }
+  
+    50% {
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+      animation-timing-function: ease-in;
+    }
+  
+    80% {
+      transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      animation-timing-function: ease-in;
+    }
+  
+    to {
+      transform: perspective(400px);
+      animation-timing-function: ease-in;
+    }
+  }
+
+#theme {
     justify-content: center;
-    font-family: 'Ultra', serif;
-    font-size: 40px;
+    font-family: 'Fontdiner Swanky', cursive;
+    font-weight: bolder;
+    font-size: 50px;
+    color: rgb(247, 207, 77);
+    backface-visibility: visible;
+    animation-name: flip;
+    animation-duration: 2s;
     /* font-weight: bolder */
 }
 
@@ -18,11 +50,31 @@ body {
     height: 100%;
 }
 
-.jumbotron {
-    margin: 30px;
+#jmb {
+    margin: 10px;
     /* background-image:  url("../images/jumbo_back.jpg"); */
-   background-color: rgb(142, 204, 245,0.5);
+    background: rgba(150, 238, 241, 0.5);
+   font-family: 'Alegreya SC', serif;
    display: flex;
    flex-direction: column;
    align-items: center;
 }
+
+
+@keyframes flash {
+    from,
+    50%,
+    to {
+      opacity: 1;
+    }
+  
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+
+
+
+  
+ 

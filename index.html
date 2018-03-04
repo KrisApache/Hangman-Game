@@ -10,11 +10,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Fredericka+the+Great|Press+Start+2P|Prosto+One|Ultra" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css?family=Fontdiner+Swanky|Alegreya+SC|Press+Start+2P|Prosto+One|Ultra|Audiowide"
+        rel="stylesheet">
+
 </head>
 
 <body>
+
+    <audio id="myAudio">
+        <source src="./assets/images/win.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <div class="header row">
         <ul class="nav justify-content-center">
@@ -24,10 +30,11 @@
         </ul>
     </div>
 
-    <div class="theme row">
+    <div class="row" id="theme">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Harry Potter</a>
+                <p>Harry Potter</p>
+                <!-- <a class="nav-link active" href="#">Harry Potter</a> -->
             </li>
         </ul>
     </div>
@@ -35,21 +42,27 @@
 
     <div class="main row">
         <div class="container">
-            <div class="jumbotron">
+            <div class="jumbotron" id="jmb">
                 <!-- <h1 class="display-4">Hello, world!</h1> -->
                 <p class="lead">Press any key to get started</p>
                 <hr class="my-4">
                 <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
-                <h2>Wins : <span id="win-count">0</span></h2> 
+                <h2>Wins :
+                    <span id="win-count">0</span>
+                </h2>
                 <h2>Current Word</h2>
-                <h2><span id="current-word">_ _ _ _ _ _ _</span></h2>
+                <h2>
+                    <span id="current-word">_ _ _ _ _ _ _</span>
+                </h2>
                 <h2>Number of Guesses Remaining</h2>
-                <h2><span id="guess-remaining">10</span></h2> 
+                <h2>
+                    <span id="guess-remaining">10</span>
+                </h2>
                 <h2>Letters Guessed So Far</h2>
-                <h2><span id="letters-guessed">_</span></h2> 
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Reset</a>
-                </p>
+                <h2>
+                    <span id="letters-guessed">_</span>
+                </h2>
+                
             </div>
         </div>
     </div>

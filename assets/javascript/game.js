@@ -13,8 +13,11 @@ var userGuessArray = [];
 // Number of guesses remaining
 var guess = 10;
 
+var x = document.getElementById("myAudio"); 
+
 // Word object
 var hangmanWord = {
+    w0: ["d","e","m","e","n","t","o","r"],
     w1: ["h", "a", "r", "r", "y"],
     w2: ["d", "u", "m", "b", "l", "e", "d", "o", "r", "e"],
     w3: ["g", "r", "i", "f", "f", "i", "n", "d", "o", "r"],
@@ -41,7 +44,7 @@ function printUserGuess(userguess) {
 };
 
 
-// function to print status of current word
+// function to display status of current word
 
 function printUnderscore(userguess) {
     var printWord = "";
@@ -58,6 +61,12 @@ function printUnderscore(userguess) {
     return printWord;
 };
 
+// function to blink correctly gussed letter
+
+function blinkWord(){
+    document.getElementById("current-word").setAttribute("style", "animation-name: flash; animation-duration: 2s; color: blue;");
+}
+
 
 // function  to initialize the game to a starting point
 
@@ -65,8 +74,9 @@ function initGame() {
     guess = 10;
     currentWord = hangmanWord["w" + Math.floor(Math.random() * 10)];
     userGuessArray.length = 0;
+    document.getElementById("current-word").setAttribute("style", "color: black;");
     currentWordDisplay = printUnderscore(userGuessArray);
-    console.log(currentWord);
+    // console.log(currentWord);
     document.getElementById("win-count").innerHTML = win;
     document.getElementById("current-word").innerHTML = currentWordDisplay;
     document.getElementById("guess-remaining").innerHTML = guess;
@@ -104,9 +114,12 @@ document.onkeyup = function (event) {
 
             // check if the letter's been correctly gussed and start a new game
             if (guess > -1 && !currentWordDisplay.includes("_")) {
+                x.play();
+                blinkWord();
                 win++;
                 document.getElementById("win-count").innerHTML = win;
-                initGame();
+                setTimeout(initGame, 2000);
+                
             }
             // check if the guess limit is crossed and start a new game
             else if (guess == 0) {
