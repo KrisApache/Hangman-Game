@@ -13,11 +13,11 @@ var userGuessArray = [];
 // Number of guesses remaining
 var guess = 10;
 
-var x = document.getElementById("myAudio"); 
+var x = document.getElementById("myAudio");
 
 // Word object
 var hangmanWord = {
-    w0: ["d","e","m","e","n","t","o","r"],
+    w0: ["d", "e", "m", "e", "n", "t", "o", "r"],
     w1: ["h", "a", "r", "r", "y"],
     w2: ["d", "u", "m", "b", "l", "e", "d", "o", "r", "e"],
     w3: ["g", "r", "i", "f", "f", "i", "n", "d", "o", "r"],
@@ -27,62 +27,59 @@ var hangmanWord = {
     w7: ["h", "o", "g", "w", "a", "r", "t", "s"],
     w8: ["q", "u", "i", "d", "d", "i", "t", "c", "h"],
     w9: ["h", "e", "d", "w", "i", "g"],
-    w10: ["m", "u", "g", "g", "l", "e"]
+    w10: ["m", "u", "g", "g", "l", "e"],
 
-};
+    // function to print letters guessed by user so far
 
-
-// function to print letters guessed by user so far
-
-function printUserGuess(userguess) {
-    var printWord = "";
-    for (i = 0; i < userguess.length; i++) {
-        printWord = printWord + userguess[i] + " ";
-    };
-
-    return printWord;
-};
-
-
-// function to display status of current word
-
-function printUnderscore(userguess) {
-    var printWord = "";
-    for (i = 0; i < currentWord.length; i++) {
-
-        if (userguess.indexOf(currentWord[i]) > -1) {
-            printWord = printWord + currentWord[i] + " ";
-        }
-        else {
-            printWord = printWord + "_ ";
+    printUserGuess: function (userguess) {
+        var printWord = "";
+        for (i = 0; i < userguess.length; i++) {
+            printWord = printWord + userguess[i] + " ";
         };
-    };
 
-    return printWord;
+        return printWord;
+    },
+
+
+    // function to display status of current word
+
+    printUnderscore: function (userguess) {
+        var printWord = "";
+        for (i = 0; i < currentWord.length; i++) {
+
+            if (userguess.indexOf(currentWord[i]) > -1) {
+                printWord = printWord + currentWord[i] + " ";
+            }
+            else {
+                printWord = printWord + "_ ";
+            };
+        };
+
+        return printWord;
+    },
+
+   // function to blink correctly guessed letter
+
+    blinkWord: function () {
+        document.getElementById("current-word").setAttribute("style", "animation-name: flash; animation-duration: 2s; color: blue;");
+    }
+
 };
 
-// function to blink correctly gussed letter
+ // function  to initialize the game to a starting point
 
-function blinkWord(){
-    document.getElementById("current-word").setAttribute("style", "animation-name: flash; animation-duration: 2s; color: blue;");
-}
-
-
-// function  to initialize the game to a starting point
-
-function initGame() {
+ function initGame() {
     guess = 10;
     currentWord = hangmanWord["w" + Math.floor(Math.random() * 10)];
     userGuessArray.length = 0;
     document.getElementById("current-word").setAttribute("style", "color: black;");
-    currentWordDisplay = printUnderscore(userGuessArray);
+    currentWordDisplay = hangmanWord.printUnderscore(userGuessArray);
     // console.log(currentWord);
     document.getElementById("win-count").innerHTML = win;
     document.getElementById("current-word").innerHTML = currentWordDisplay;
     document.getElementById("guess-remaining").innerHTML = guess;
-    document.getElementById("letters-guessed").innerHTML = printUserGuess(userGuessArray);
+    document.getElementById("letters-guessed").innerHTML = hangmanWord.printUserGuess(userGuessArray);
 }
-
 
 // ----------------------------------------------------------------------------------------------
 // Start of the game
@@ -101,25 +98,26 @@ document.onkeyup = function (event) {
 
             // display the letters currently guessed by the user
             userGuessArray.push(currentKey);
-            document.getElementById("letters-guessed").innerHTML = printUserGuess(userGuessArray);
+            document.getElementById("letters-guessed").innerHTML = hangmanWord.printUserGuess(userGuessArray);
 
             // check if the current user key is among the letters in the chosen word
             // display letter in 'current word' if it matches
-            currentWordDisplay = printUnderscore(userGuessArray);
+            currentWordDisplay = hangmanWord.printUnderscore(userGuessArray);
             document.getElementById("current-word").innerHTML = currentWordDisplay;
 
             // decrement 'guess' and display it's updated value
             guess--;
             document.getElementById("guess-remaining").innerHTML = guess;
 
-            // check if the letter's been correctly gussed and start a new game
+            // check if the letter's been correctly guessed and start a new game
             if (guess > -1 && !currentWordDisplay.includes("_")) {
-                x.play();
-                blinkWord();
                 win++;
                 document.getElementById("win-count").innerHTML = win;
+                x.play();
+                hangmanWord.blinkWord();
                 setTimeout(initGame, 2000);
                 
+
             }
             // check if the guess limit is crossed and start a new game
             else if (guess == 0) {
